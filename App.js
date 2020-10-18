@@ -13,6 +13,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 import {decode, encode} from 'base-64'
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
+import { firebase } from './src/firebase/config'
+
 
 // Components
 import LoginScreen from './src/screens/LoginScreen/LoginScreen'
@@ -21,19 +23,38 @@ import RegistrationScreen from './src/screens/RegistrationScreen/RegistrationScr
 
 const Stack = createStackNavigator();
 
-// function HomeScreen1() {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Text>Home Screen test 1</Text>
-//     </View>
-//   );
-// }
-
-const App = () => {
+export default function App(){
 
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null)
 
+
+  useEffect(() => {
+    const usersRef = firebase.firestore().collection('users');
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        usersRef
+          .doc(user.uid)
+          .get()
+          .then((document) => {
+            const userData = document.data()
+            setLoading(false)
+            setUser(userData)
+          })
+          .catch((error) => {
+            setLoading(false)
+          });
+      } else {
+        setLoading(false)
+      }
+    });
+  }, []);
+
+  if (loading) {
+    return (
+      <></>
+    )
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -52,5 +73,3 @@ const App = () => {
     </NavigationContainer>
   );
 };
-
-export default App;
