@@ -3,17 +3,10 @@ import { View, Text } from 'react-native';
 
 /* Home Screen */
 
-export default class HomeScreen extends React.Component{
-    render (){
+export default function HomeScreen (props){
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View>
             <Text>Home Screen test</Text>
           </View>
         );
-    }
-
-
-
-
-
 }

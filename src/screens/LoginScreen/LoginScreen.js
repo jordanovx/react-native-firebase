@@ -21,7 +21,7 @@ export default function LoginScreen({navigation}){
         return (
             <View style={styles.container}>
             <KeyboardAwareScrollView style={{ flex: 1, width: '100%'}} keyboardShouldPersistTaps='always' >
-                <Image style={styles.logo} />
+            <Image style={styles.logo} source={require('../../../assets/monitor-screen.svg')} />
                 <TextInput
                     style={styles.input}
                     placeholder = 'E-mail'
