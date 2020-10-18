@@ -31,8 +31,26 @@ export default function LoginScreen({navigation}){
                     underlineColorAndroid = "transparent"
                     autoCapitalize = 'none'
                     />
+                <TextInput
+                    style={styles.input}
+                    placeholderTextColor = '#aaaaaa'
+                    secureTextEntry
+                    placeholder = 'Password'
+                    onChangeText = {(text) => setPassword(text)}
+                    value = {password}
+                    underlineColorAndroid = 'transparent'
+                    autoCapitalize = 'none'
+                />
+
+                <TouchableOpacity style = {styles.button} onPress={() => onLoginPress()}>
+                    <Text style={styles.buttonTitle}>Log in</Text>
+                </TouchableOpacity>
+
+                <View style={styles.footerView}>
+                    <Text style={styles.footerText}>Don't have an account?<Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign Up</Text></Text>
+                </View>
+
             </KeyboardAwareScrollView>
-            <Text>Login Screen test21</Text>
           </View>
         );
 
